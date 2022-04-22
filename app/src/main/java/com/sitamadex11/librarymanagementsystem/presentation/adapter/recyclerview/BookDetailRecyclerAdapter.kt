@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.sitamadex11.librarymanagementsystem.R
 import com.sitamadex11.librarymanagementsystem.data.model.BookDetail
 
-class BookDetailRecyclerAdapter(val context:Context, val navController: NavController):
+class BookDetailRecyclerAdapter(val context:Context, val navController: NavController,val isAdmin:Boolean):
     RecyclerView.Adapter<BookDetailRecyclerAdapter.BookDetailRecyclerViewHolder>() {
     private val list = ArrayList<BookDetail>()
     private var id: Long?= null
@@ -41,7 +41,11 @@ class BookDetailRecyclerAdapter(val context:Context, val navController: NavContr
             bundle.putString("date", list[pos].date)
             bundle.putString("desc", list[pos].description)
             bundle.putString("url", list[pos].imgUrl)
+            bundle.putBoolean("isAdmin", isAdmin)
+            if(!isAdmin)
             navController.navigate(R.id.action_homeFragment_to_bookDetailFragment,bundle)
+            else
+                navController.navigate(R.id.action_adminHomeFragment_to_bookDetailFragment2,bundle)
         }
     }
 

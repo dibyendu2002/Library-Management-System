@@ -22,7 +22,7 @@ class BookDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_book_detail, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_book_detail, container, false)
         return binding.root
     }
 
@@ -33,25 +33,37 @@ class BookDetailFragment : Fragment() {
         binding.txtBookName.text = requireArguments().getString("title")
         binding.txtDesc.text = requireArguments().getString("desc")
         binding.txtAuthors.text = requireArguments().getString("author")
-
-        binding.btnReqIssue.setOnClickListener {
-            val newIssueReq = hashMapOf(
-                "cardNo" to 1234,
-                "studentName" to "Sitam Sardar",
-                "bookId" to 101,
-                "isAccepted" to false,
-                "isRejected" to false,
-                "issueDate" to "null"
-            )
-            db.collection("issues_log")
-                .add(newIssueReq)
-                .addOnSuccessListener { documentReference ->
-                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                    Toast.makeText(requireContext(),"Request Sent Successfully.",Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener { e ->
-                    Log.w(TAG, "Error adding document", e)
-                }
+        val isAdmin:Boolean = requireArguments().getBoolean("isAdmin")
+        if (!isAdmin) {
+            binding.btnReqIssue.setOnClickListener {
+                binding.btnReqIssue.text = "Request for Issue"
+                val newIssueReq = hashMapOf(
+                    "cardNo" to 1234,
+                    "studentName" to "Sitam Sardar",
+                    "bookId" to 101,
+                    "isAccepted" to false,
+                    "isRejected" to false,
+                    "issueDate" to "null"
+                )
+                db.collection("issues_log")
+                    .add(newIssueReq)
+                    .addOnSuccessListener { documentReference ->
+                        Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                        Toast.makeText(
+                            requireContext(),
+                            "Request Sent Successfully.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w(TAG, "Error adding document", e)
+                    }
+            }
+        } else {
+            binding.btnReqIssue.text = "Edit Here"
+            binding.btnReqIssue.setOnClickListener {
+                Toast.makeText(requireContext(),"Edit according to your prefernce",Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
