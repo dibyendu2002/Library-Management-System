@@ -90,24 +90,33 @@ class AdminHomeFragment : Fragment(), NavigationView.OnNavigationItemSelectedLis
             }
             R.id.itemAddBook -> {
                 Toast.makeText(requireContext(),"${item.title} clicked", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_adminHomeFragment_to_addBookFragment)
+                binding.drawerlayout.closeDrawer(GravityCompat.START)
             }
             R.id.itemRemoveBook -> {
                 Toast.makeText(requireContext(),"${item.title} clicked", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_adminHomeFragment_to_removeFragment)
+                binding.drawerlayout.closeDrawer(GravityCompat.START)
             }
             R.id.itemUpdate -> {
                 Toast.makeText(requireContext(),"${item.title} clicked", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_adminHomeFragment_to_updateBookFragment)
+                binding.drawerlayout.closeDrawer(GravityCompat.START)
             }
             R.id.itemIssue -> {
                 Toast.makeText(requireContext(),"${item.title} clicked", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_adminHomeFragment_to_issueBookFragment)
+                binding.drawerlayout.closeDrawer(GravityCompat.START)
             }
             R.id.itemReturnBook -> {
                 Toast.makeText(requireContext(),"${item.title} clicked", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_adminHomeFragment_to_returnBookFragment)
+                binding.drawerlayout.closeDrawer(GravityCompat.START)
             }
             R.id.itemReissue -> {
                 Toast.makeText(requireContext(),"${item.title} clicked", Toast.LENGTH_SHORT).show()
-            }
-            R.id.itemCollectFine -> {
-                Toast.makeText(requireContext(),"${item.title} clicked", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_adminHomeFragment_to_reIssueBookFragment)
+                binding.drawerlayout.closeDrawer(GravityCompat.START)
             }
             R.id.itemCollectFine -> {
                 Toast.makeText(requireContext(),"${item.title} clicked", Toast.LENGTH_SHORT).show()
